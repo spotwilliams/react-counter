@@ -29,6 +29,20 @@ class Counters extends Component {
         this.setState({counters})
     };
 
+    handleIncrement = counter => {
+        console.log(counter);
+        // Clone the counters array of the state
+        const counters = [...this.state.counters];
+        const index = counters.indexOf(counter);
+        // clone the counter prop received into the counters cloned object
+        // to avoid change the state of the object directly
+        counters[index] = {...counter};
+        // mutate the object
+        counters[index].value++;
+        // make the object react
+        this.setState({counters});
+    };
+
     render() {
         return (
             <div>
@@ -40,6 +54,7 @@ class Counters extends Component {
                     <Counter
                         key={counter.id}
                         counter={counter}
+                        onIncrement={this.handleIncrement}
                         onDelete={this.handleDelete}
                     >
                     </Counter>
